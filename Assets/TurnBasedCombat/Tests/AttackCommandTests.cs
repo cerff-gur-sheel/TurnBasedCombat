@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NUnit.Framework;
+using TurnBasedCombat.Characters;
 using TurnBasedCombat.Commands;
 using TurnBasedCombat.Core;
 using TurnBasedCombat.Data;
@@ -24,14 +25,14 @@ namespace TurnBasedCombat.Tests
             playerData.characterName = "Hero";
             playerData.attacks = new List<AttackData> { attackData };
             playerData.hp = 50;
-            _player = new Character(playerData);
+            _player = new PlayerCharacter(playerData);
 
             var enemyData = ScriptableObject.CreateInstance<CharacterData>();
             enemyData.characterName = "Goblin";
             enemyData.attacks = new List<AttackData> { attackData };
             enemyData.hp = 20;
-            _enemy1 =  new Character(enemyData);
-            _enemy2 =  new Character(enemyData);
+            _enemy1 =  new EnemyCharacter(enemyData);
+            _enemy2 =  new EnemyCharacter(enemyData);
         }
 
         [Test]

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TurnBasedCombat.Core
 {
-    public class Character
+    public abstract class Character
     {
         private readonly CharacterData _data;
 

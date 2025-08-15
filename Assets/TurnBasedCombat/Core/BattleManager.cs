@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TurnBasedCombat.Characters;
 using TurnBasedCombat.Data;
 using TurnBasedCombat.States;
 using UnityEngine;
@@ -23,8 +24,8 @@ namespace TurnBasedCombat.Core
         private void Start()
         {
             // Initialize Characters
-            foreach (var player in players) PlayerTeam.Add(new Character(player));
-            foreach (var enemy in enemies) EnemyTeam.Add(new Character(enemy));
+            foreach (var player in players) PlayerTeam.Add(new PlayerCharacter(player));
+            foreach (var enemy in enemies) EnemyTeam.Add(new EnemyCharacter(enemy));
             
             // Initialize and register the states
             states["StartTurn"]       = new StartTurnState(this);
