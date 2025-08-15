@@ -14,7 +14,6 @@ namespace TurnBasedCombat.States
         
         public void Enter()
         {
-            Debug.Log("[StartTurn] Enter");
         }
 
         public void Update()
@@ -24,7 +23,6 @@ namespace TurnBasedCombat.States
 
         public void Exit()
         {
-            Debug.Log("[StartTurn] Exit");
         }
     }
 }

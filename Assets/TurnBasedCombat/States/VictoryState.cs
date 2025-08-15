@@ -11,8 +11,6 @@ namespace TurnBasedCombat.States
         }
         public void Enter()
         {
-            
-            Debug.Log("Enter Victory State");
         }
 
         public void Update()
