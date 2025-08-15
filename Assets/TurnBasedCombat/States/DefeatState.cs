@@ -10,9 +10,7 @@ namespace TurnBasedCombat.States
         {
             _manager = manager;
         }
-        public void Enter()
-        {
-        }
+        public void Enter() => _manager.Defeat();
 
         public void Update()
         {

@@ -6,5 +6,9 @@ namespace TurnBasedCombat.Characters
     public class PlayerCharacter : Character
     {
         public PlayerCharacter(CharacterData data) : base(data) { }
+        public override void TakeTurn(BattleManager manager, Character self)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

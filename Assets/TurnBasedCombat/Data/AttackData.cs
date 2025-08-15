@@ -9,5 +9,7 @@ namespace TurnBasedCombat.Data
         public int baseDamage;
         public float multiplier;
         public Sprite icon;
+        public bool areaAttack;
+        public bool selectableTarget;
     }
 }

@@ -5,14 +5,15 @@ namespace TurnBasedCombat.States
 {
     public class VictoryState : IBattleState
     {
+        private readonly BattleManager _manager;
+        
         public VictoryState(BattleManager manager)
         {
-           
+           _manager = manager;
         }
-        public void Enter()
-        {
-        }
-
+     
+        public void Enter() => _manager.Victory();
+        
         public void Update()
         {
             throw new System.NotImplementedException();

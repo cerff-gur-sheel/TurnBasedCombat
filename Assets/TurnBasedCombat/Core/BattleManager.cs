@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TurnBasedCombat.Characters;
 using TurnBasedCombat.Data;
@@ -20,6 +21,8 @@ namespace TurnBasedCombat.Core
         private List<CharacterData> enemies;
         
         internal readonly List<Character> EnemyTeam = new();
+        public event Action OnVictory;
+        public event Action OnDefeat; 
         
         private void Start()
         {
@@ -50,7 +53,7 @@ namespace TurnBasedCombat.Core
         {
             CurrentState?.Exit();
 
-            if (CurrentState is VictoryState || CurrentState is DefeatState)
+            if (CurrentState is VictoryState or DefeatState)
                 return;
 
             if (_states.TryGetValue(stateName, out var newState))
@@ -60,5 +63,8 @@ namespace TurnBasedCombat.Core
             }
             else throw new KeyNotFoundException($"State '{stateName}' not found on BattleManager.");
         }
+        
+        internal void Victory() => OnVictory?.Invoke();
+        internal void Defeat() => OnDefeat?.Invoke();
     }
 }
