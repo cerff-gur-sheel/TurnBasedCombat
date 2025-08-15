@@ -9,7 +9,7 @@ namespace TurnBasedCombat.Core
     public class BattleManager : MonoBehaviour
     { 
         internal IBattleState CurrentState { get; private set; }
-        private Dictionary<string, IBattleState> states = new();
+        private readonly Dictionary<string, IBattleState> _states = new();
         
         [SerializeField]
         private List<CharacterData> players;
@@ -28,12 +28,12 @@ namespace TurnBasedCombat.Core
             foreach (var enemy in enemies) EnemyTeam.Add(new EnemyCharacter(enemy));
             
             // Initialize and register the states
-            states["StartTurn"]       = new StartTurnState(this);
-            states["SelectAction"]    = new SelectActionState(this);
-            states["ExecuteAction"]   = new ExecuteActionState(this);
-            states["EndTurn"]         = new EndTurnState(this);
-            states["Victory"]         = new VictoryState(this);
-            states["Defeat"]          = new DefeatState(this);
+            _states["StartTurn"]       = new StartTurnState(this);
+            _states["SelectAction"]    = new SelectActionState(this);
+            _states["ExecuteAction"]   = new ExecuteActionState(this);
+            _states["EndTurn"]         = new EndTurnState(this);
+            _states["Victory"]         = new VictoryState(this);
+            _states["Defeat"]          = new DefeatState(this);
             
             // Define initial state
             ChangeState("StartTurn");
@@ -41,9 +41,9 @@ namespace TurnBasedCombat.Core
         
         private void Update() => CurrentState?.Update();
 
-        internal void RegisterState(string name, IBattleState state)
+        internal void RegisterState(string stateName, IBattleState state)
         {
-            states[name] = state;
+            _states[stateName] = state;
         }       
         
         public void ChangeState(string stateName)
@@ -53,7 +53,7 @@ namespace TurnBasedCombat.Core
             if (CurrentState is VictoryState || CurrentState is DefeatState)
                 return;
 
-            if (states.TryGetValue(stateName, out var newState))
+            if (_states.TryGetValue(stateName, out var newState))
             {
                 CurrentState = newState;
                 CurrentState.Enter();

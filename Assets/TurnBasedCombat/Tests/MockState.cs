@@ -7,16 +7,14 @@ namespace TurnBasedCombat.Tests
     {
         private class MockState : IBattleState
         {
-            public string Name;
             public bool EnterCalled;
             public bool ExitCalled;
             private readonly string _nextState;
 
             private readonly BattleManager _manager;
 
-            public MockState(string name, string next, BattleManager m)
+            public MockState(string next, BattleManager m)
             {
-                Name = name;
                 _nextState = next;
                 _manager = m;
             }
@@ -32,9 +30,9 @@ namespace TurnBasedCombat.Tests
             // ReSharper disable once Unity.IncorrectMonoBehaviourInstantiation
             var manager = new BattleManager();
             
-            var stateA = new MockState("A", "B", manager);
-            var stateB = new MockState("B", "C", manager);
-            var stateC = new MockState("C", "A", manager);
+            var stateA = new MockState("B", manager);
+            var stateB = new MockState("C", manager);
+            var stateC = new MockState("A", manager);
 
             manager.RegisterState("A", stateA);
             manager.RegisterState("B", stateB);
