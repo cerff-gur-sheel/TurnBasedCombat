@@ -13,6 +13,9 @@ namespace TurnBasedCombat.Core
         
         public int Hp { get; private set; }
         
+        public int Stamina { get; private set; }
+        public int Mana { get; private set; }
+        
         public bool IsAlive => Hp > 0;
         
         public IReadOnlyList<AttackData> Attacks => _data.attacks;
@@ -26,13 +29,21 @@ namespace TurnBasedCombat.Core
             Hp = data.hp;
         }
 
-        public void TakeDamage(int damage)
+        internal void TakeDamage(int damage)
         {
             Hp = Mathf.Max(Hp - damage, 0);
             OnDamageTaken?.Invoke(this, damage);
             if (Hp == 0) OnDeath?.Invoke(this);
         }
 
-        public abstract void TakeTurn(BattleManager manager, Character self);
+        internal void ExecuteCommand(ICommand command)
+        {
+            if (command.CanExecute(this))
+            {
+                command.Execute();
+            }
+        }
+        
+        internal abstract void TakeTurn(BattleManager manager, Character self);
     }
 }

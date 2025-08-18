@@ -7,30 +7,35 @@ namespace TurnBasedCombat.Commands
 {
     public class AttackCommand : ICommand
     {
-        private Character attacker;
-        private List<Character> targets = new();
-        private AttackData data;
+        private readonly Character _user;
+        private readonly List<Character> _targets = new();
+        private readonly AttackData _data;
         
-        internal AttackCommand(Character attacker, Character target, AttackData data)
+        internal AttackCommand(Character user, Character target, AttackData data)
         {
-            this.attacker = attacker;
-            targets.Add(target);
-            this.data = data;
+            _user = user;
+            _targets.Add(target);
+            _data = data;
         }
 
-        internal AttackCommand(Character attacker, List<Character> targets, AttackData data)
+        internal AttackCommand(Character user, List<Character> targets, AttackData data)
         {
-            this.attacker = attacker;
-            this.targets = targets;
-            this.data = data;
+            _user = user;
+            _targets = targets;
+            _data = data;
         }
-        
+
+        public bool CanExecute(Character user) => user.Stamina >= _data.staminaCost && user.Mana >= _data.manaCost;
+
         public void Execute()
         {
-            foreach (var target in targets)
+            foreach (var target in _targets)
             {
-                target.TakeDamage(data.baseDamage);
-                Debug.Log($"{attacker.CharacterName} attacks {target.CharacterName} using {data.attackName} causing {data.baseDamage} of damage");
+                target.TakeDamage(_data.baseDamage);
+                Debug.Log($"{_user.CharacterName} " +
+                          $"attacks {target.CharacterName} " +
+                          $"using {_data.attackName} " +
+                          $"causing {_data.baseDamage} of damage");
             }
         }
     }

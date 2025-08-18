@@ -6,10 +6,10 @@ namespace TurnBasedCombat.UI
 {
     public class UIManager : MonoBehaviour
     {
-        public event Action<string> OnMessageGenerated;
 
-        public void Subscribe(BattleManager battleManager, Character player, Character enemy)
+        public void Subscribe(BattleManager battleManager)
         {
+            
         }
     }
 }

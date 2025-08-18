@@ -11,5 +11,7 @@ namespace TurnBasedCombat.Data
         public Sprite icon;
         public bool areaAttack;
         public bool selectableTarget;
+        public int staminaCost;
+        public int manaCost;
     }
 }

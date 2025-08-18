@@ -6,7 +6,8 @@ namespace TurnBasedCombat.Characters
     public class EnemyCharacter : Character
     {
         public EnemyCharacter(CharacterData data) : base(data) { }
-        public override void TakeTurn(BattleManager manager, Character self)
+
+        internal override void TakeTurn(BattleManager manager, Character self)
         {
             throw new System.NotImplementedException();
         }
