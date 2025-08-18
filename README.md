@@ -1,2 +1,2 @@
 # TurnBasedCombat
-<img width="2103" height="655" alt="image" src="https://github.com/user-attachments/assets/519cfd35-dc33-4d7f-b4d7-484e0cf5789e" />
+<img width="1600" height="522" alt="image" src="https://github.com/user-attachments/assets/f443d6c1-139b-4710-9eff-357102a3c258" />
