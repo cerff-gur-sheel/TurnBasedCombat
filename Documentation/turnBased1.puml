@@ -1,16 +1,18 @@
 @startuml
-title Turn-Based RPG Combat System (Unity Asset)
+title Turn-Based RPG Combat System (Unity Asset) - Refined
 
+' --- Estados da batalha ---
 interface IBattleState {
-    +Enter()
-    +Update()
-    +Exit()
+    +Enter(context: BattleContext)
+    +Update(context: BattleContext)
+    +Exit(context: BattleContext)
 }
 
 class BattleManager {
     -currentState: IBattleState
-    -states: Dictionary<string, IBattleState>
-    +ChangeState(stateName: string)
+    -states: Dictionary<Type, IBattleState>
+    -context: BattleContext
+    +ChangeState(stateType: Type)
     +Update()
 }
 
@@ -21,9 +23,18 @@ class EndTurnState implements IBattleState
 class VictoryState implements IBattleState
 class DefeatState implements IBattleState
 
+' --- Contexto ---
+class BattleContext {
+    +turnOrder: List<Character>
+    +currentCharacter: Character
+    +allies: List<PlayerCharacter>
+    +enemies: List<EnemyCharacter>
+    +log: List<string>
+}
+
+' --- Comandos ---
 interface ICommand {
-    +Execute()
-    +Undo()
+    +Execute(context: BattleContext)
 }
 
 class AttackCommand implements ICommand
@@ -31,35 +42,44 @@ class DefendCommand implements ICommand
 class UseItemCommand implements ICommand
 class UseSkillCommand implements ICommand
 
+' --- Estratégias de IA ---
 interface IAttackStrategy {
-    +ChooseCommand(): ICommand
+    +ChooseCommand(enemy: EnemyCharacter, context: BattleContext): ICommand
 }
 
 class AggressiveStrategy implements IAttackStrategy
 class DefensiveStrategy implements IAttackStrategy
 class RandomStrategy implements IAttackStrategy
 
+' --- Personagens ---
 class Character {
     +name: string
     +hp: int
     +attack: int
     +defense: int
-    +ExecuteCommand(command: ICommand)
-    +SetStrategy(strategy: IAttackStrategy)
+    +ExecuteCommand(command: ICommand, context: BattleContext)
 }
 
 class PlayerCharacter extends Character
-class EnemyCharacter extends Character
-
-class UIManager {
-    +OnTurnChanged()
-    +OnDamageDealt()
-    +OnVictory()
-    +OnDefeat()
+class EnemyCharacter extends Character {
+    -strategy: IAttackStrategy
+    +SetStrategy(strategy: IAttackStrategy)
 }
 
-' Relationships
+' --- Interface/UI ---
+class UIManager {
+    +OnTurnChanged(character: Character)
+    +OnDamageDealt(source: Character, target: Character, amount: int)
+    +OnVictory()
+    +OnDefeat()
+    +RequestPlayerAction(): ICommand
+}
+
+' --- Relações ---
 BattleManager --> IBattleState
+BattleManager --> BattleContext
+BattleManager --> UIManager : notify events
+
 IBattleState <|.. StartTurnState
 IBattleState <|.. SelectActionState
 IBattleState <|.. ExecuteActionState
@@ -78,7 +98,6 @@ IAttackStrategy <|.. AggressiveStrategy
 IAttackStrategy <|.. DefensiveStrategy
 IAttackStrategy <|.. RandomStrategy
 
-BattleManager --> UIManager : events/observer
 Character --> UIManager : events/observer
 @enduml
 
