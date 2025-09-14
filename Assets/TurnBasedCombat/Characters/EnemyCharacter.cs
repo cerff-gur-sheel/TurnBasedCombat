@@ -1,5 +1,5 @@
-using TurnBasedCombat.Core;
 using TurnBasedCombat.Data;
+using TurnBasedCombat.Strategies;
 
 namespace TurnBasedCombat.Characters
 {
@@ -11,5 +11,9 @@ namespace TurnBasedCombat.Characters
         {
             throw new System.NotImplementedException();
         }
+
+        public IAttackStrategy Strategy;
+        
+        public void SetStrategy(IAttackStrategy strategy) =>  Strategy = strategy;
     }
 }

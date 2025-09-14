@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using TurnBasedCombat.Core;
+using TurnBasedCombat.Characters;
 using TurnBasedCombat.Data;
 using UnityEngine;
 

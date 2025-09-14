@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using TurnBasedCombat.Characters;
 using TurnBasedCombat.Data;
 using TurnBasedCombat.States;
-using TurnBasedCombat.UI;
 using UnityEngine;
 
-namespace TurnBasedCombat.Core
+namespace TurnBasedCombat
 {
     public class BattleManager : MonoBehaviour
     {
-        public UIManager uiManager;
-        
         internal IBattleState CurrentState { get; private set; }
         private readonly Dictionary<string, IBattleState> _states = new();
         
@@ -43,8 +40,6 @@ namespace TurnBasedCombat.Core
             
             // Define initial state
             ChangeState("StartTurn");
-            
-            uiManager.Subscribe(this);
         }
         
         private void Update() => CurrentState?.Update();

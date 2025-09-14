@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TurnBasedCombat.Data;
 using UnityEngine;
 
-namespace TurnBasedCombat.Core
+namespace TurnBasedCombat.Characters
 {
     public abstract class Character
     {
@@ -34,14 +34,6 @@ namespace TurnBasedCombat.Core
             Hp = Mathf.Max(Hp - damage, 0);
             OnDamageTaken?.Invoke(this, damage);
             if (Hp == 0) OnDeath?.Invoke(this);
-        }
-
-        internal void ExecuteCommand(ICommand command)
-        {
-            if (command.CanExecute(this))
-            {
-                command.Execute();
-            }
         }
         
         internal abstract void TakeTurn(BattleManager manager, Character self);

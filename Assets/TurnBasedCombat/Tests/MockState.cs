@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using TurnBasedCombat.Core;
+using TurnBasedCombat.States;
 
 namespace TurnBasedCombat.Tests
 {

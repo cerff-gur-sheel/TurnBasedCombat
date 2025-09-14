@@ -1,4 +1,3 @@
-using TurnBasedCombat.Core;
 using TurnBasedCombat.Data;
 
 namespace TurnBasedCombat.Characters

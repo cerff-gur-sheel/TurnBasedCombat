@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using TurnBasedCombat.Characters;
 using TurnBasedCombat.Commands;
-using TurnBasedCombat.Core;
 
 namespace TurnBasedCombat.Strategies
 {
@@ -11,7 +11,6 @@ namespace TurnBasedCombat.Strategies
         {
             var attacks = self.Attacks;
             var index = new Random().Next(attacks.Count);
-            
             
             return new AttackCommand(self, targets, attacks[index]);
         }

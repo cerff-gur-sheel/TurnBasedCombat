@@ -1,4 +1,6 @@
-namespace TurnBasedCombat.Core
+using TurnBasedCombat.Characters;
+
+namespace TurnBasedCombat.Commands
 {
     public interface ICommand
     {

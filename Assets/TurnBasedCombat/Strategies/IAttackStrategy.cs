@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using TurnBasedCombat.Core;
+using TurnBasedCombat.Characters;
+using TurnBasedCombat.Commands;
 
 namespace TurnBasedCombat.Strategies
 {

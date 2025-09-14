@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using TurnBasedCombat.Characters;
 using TurnBasedCombat.Commands;
-using TurnBasedCombat.Core;
 using TurnBasedCombat.Data;
 using UnityEngine;
 

@@ -1,4 +1,4 @@
-namespace TurnBasedCombat.Core
+namespace TurnBasedCombat.States
 {
     public interface IBattleState
     {
